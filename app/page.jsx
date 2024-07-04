@@ -1,3 +1,4 @@
+import { Footer } from "./components/Footer";
 import Link from "next/link";
 import{ SiPhotobucket } from"react-icons/si";
 import{GrMoney} from "react-icons/gr";
@@ -5,10 +6,8 @@ import{TbTrack} from "react-icons/tb";
 import{ GiProfit} from "react-icons/gi";
 import{FaNoteSticky}from "react-icons/fa6";
 
-
 export default function Home() {
   return ( 
-    <>
     <main className="px-3 md:px-12 lg:px-16 bg-gradient-to-b from-[#F0ECE5] via-white to-[#B6BBC4]">
       <section className="min:h-screen md:h-screen flex flex-col justify-between gap-16 pb-12 md:gap-0">
         <nav className="flex justify-between items-center pt-3">
@@ -56,15 +55,14 @@ export default function Home() {
         </div>
         <div className="flex flex-col justify-around bg-[#A91D3a] rounded-lg p-4">
           <p className="text-4xl  text-[#F0ECE5]"> Start Tracking Your Investment now</p>
-          <Link href='#' className="bg-[#F0ECE5] rounded-lg w-full py-3 uppercase text-2xl text-[#161A30]">Get Started</Link>
+          <Link href='#' className="bg-[#F0ECE5] rounded-lg w-full py-3 uppercase text-2xl text-[#161A30]" >Get Started</Link>
         </div>
         </article>
       </section>
+       
+     
    </main>
 
-    <footer className=" h-[60pxp] flex justify-center items-center px-3 md:px-12 lg:px-16  bg-[#31304d]">
-      <p className="">&copy; {}2024 All Rights Reserved . Portfolibles </p>
-    </footer>
-    </>
+  
   );
 }
