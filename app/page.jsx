@@ -1,6 +1,5 @@
 import { Footer } from "./components/Footer";
 import Link from "next/link";
-import{ SiPhotobucket } from"react-icons/si";
 import{GrMoney} from "react-icons/gr";
 import{TbTrack} from "react-icons/tb";
 import{ GiProfit} from "react-icons/gi";
@@ -8,19 +7,8 @@ import{FaNoteSticky}from "react-icons/fa6";
 
 export default function Home() {
   return ( 
-    <main className="px-3 md:px-12 lg:px-16 bg-gradient-to-b from-[#F0ECE5] via-white to-[#B6BBC4]">
-      <section className="min:h-screen md:h-screen flex flex-col justify-between gap-16 pb-12 md:gap-0">
-        <nav className="flex justify-between items-center pt-3">
-          <button className="text-sm md:text-lg text-[#31304D] flex flex-col md:flex-row md:gap-2 border border-[#31304D] rounded-md p-3 ">
-            <span>Yield</span>
-            <span> Calculator</span>
-          </button>
-
-            <SiPhotobucket className="text-[#31304D] text-3xl"/>
-
-          <Link className="border-b-2 border-[#31304D] py-3 text-[#31304D] py-3 " href="#"> Sign in</Link>
-        </nav>
-
+    <main className="px-3 md:px-12 lg:px-16 py-12  bg-gradient-to-b from-[#F0ECE5] via-white to-[#B6BBC4]">
+      <section className="min:h-screen md:h-screen flex flex-col justify-between gap-16 md:gap-0">
         <div className="row-span-5 flex justify-center items-center">
         <blockquote className="w-full md:[480px] lg:w-[720px]">
           <h1 className="text-5xl md:text-6xl text-[#31104d] text-center font-bold">
