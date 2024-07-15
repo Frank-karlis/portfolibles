@@ -1,41 +1,43 @@
-"use client"
-import { useState,useEffect } from "react";
+"use client";
+import { useState,useEffect } from "react"; 
 import Link from "next/link";
-import { CiCirclePlus} from "react-icons/ci";
+import { CiCirclePlus } from "react-icons/ci";
 import { BiCabinet } from "react-icons/bi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
 import { db } from "@/lib/firebase.setting";
-import {getDocs,collection} from "firebase/firestore";
+import { collection,onSnapshot } from "firebase/firestore";
 import { AssetTab } from "../components/AssetTab";
 
 export default function Dashboard () {
     const [assets,setAssets] = useState([]);
-    useEffect(() => {
-        const getAssetsData =async () =>{
-            const compiliedData =[];
-            const q =collection(db,'assets');
-            const onSnap= await getDocs(q);
 
-            onSnap.docs.forEach(doc => {
-                compiliedData.push({
-                    id:doc.id,
-                    data:doc.data()
-         })
-      });
-            setAssets(compiliedData)
+    useEffect(() => {
+        const getAssetsData = async () => {
+            const q = collection(db,'assets');
+            
+            onSnapshot(q,querySnapShot => {
+                const compiledData = [];
+
+                querySnapShot.docs.forEach(doc => {
+                    compiledData.push({
+                        id:doc.id,
+                        data:doc.data()
+                    })
+                });
+
+                setAssets(compiledData)
+            });
         }
 
-        // call the function
+        //call the function
         getAssetsData()
-    },[])
+    },[]);
 
-   
-    
     return (
         <main className="min-h-[480px] grid md:grid-cols-2 md:gap-8 lg:gap-12 px-3 md:px-12 lg:px-24 py-12">
             <section className="grid grid-cols-2 grid-rows-2 gap-3 p-1">
-                <Link href=" /dashboard/create"className={styles.btn}>
+                <Link href="/dashboard/create" className={styles.btn}>
                     <CiCirclePlus className={styles.iconStyle}/>
                     <span className={styles.btnText}>Create</span>
                 </Link>
@@ -58,21 +60,20 @@ export default function Dashboard () {
                     <p className="uppercase text-2xl text-[#161A30]">My Portfolio</p>
                 </blockquote>
                 
-                <div className="flex flex-cols gap-2">
-                   <div className="grid grid-cols-1 gap-2">
-                   {assets.map(item => {
-                        return(
-                            <AssetTab
+                <div className="flex flex-col gap-2">
+                    {assets.map(item => {
+                        return (
+                            <AssetTab 
                             id={item.id}
-                            title={item.data.title}
-                            holdWallet={item.data.wallet}
+                            title={item.data.title} 
+                            holdWallet={item.data.wallet} 
                             qty={item.data.quantity}
                             tick={item.data.ticker}
-                            key={item.id}
-                            />
+                            price={item.data.price}
+                            notes={item.data.notes}
+                            key={item.id}/>
                         )
                     })}
-                   </div>
                 </div>
             </aside>
         </main>
