@@ -1,3 +1,4 @@
+
 "use client";
 import React from "react";
 import Link from "next/link";
@@ -11,8 +12,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import CircularProgress from "@mui/material/CircularProgress";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { db } from "@/lib/firebase.setting";
-import { collection,addDoc } from "firebase/firestore";
+import { db,storage } from "@/lib/firebase.setting";
+import { collection,addDoc,updateDoc,doc } from "firebase/firestore";
+import { ref,uploadString,getDownloadURL } from "firebase/storage";
 
 const rules = yup.object().shape({
     title:yup.string().required().min(3),
@@ -26,6 +28,19 @@ const rules = yup.object().shape({
 export default function Create () {
     const [open, setOpen] = React.useState(false);
     const [openProgress,setOpenProgress] = React.useState(false);
+    const [selectedFile,setSelectedFile] = React.useState(null);
+
+    const addImageToPost = (e) => {
+        const reader = new FileReader();
+
+        if (e.target.files[0]) {
+            reader.readAsDataURL(e.target.files[0]);
+        }
+
+        reader.onload = readerEvent => {
+            setSelectedFile(readerEvent.target.result);
+        }
+    }
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -37,7 +52,7 @@ export default function Create () {
 
     // create records in firestore -------
     const createRecords = async () => {
-        await addDoc(collection(db,"assets"),{
+        const docRef = await addDoc(collection(db,"assets"),{
             title: values.title,
             wallet:values.wallet,
             price:values.price,
@@ -46,13 +61,28 @@ export default function Create () {
             notes:values.notes,
             timestamp:new Date().getTime(),
             createdBy:null,
-        }).then(() => {
-            handleClickOpen();
+        });
+        
+        const imageRef = ref(storage,`assets/${docRef.id}/image`);
+
+        if (selectedFile) {
+            await uploadString(imageRef,selectedFile,"data_url")
+            .then(async () => {
+                const downloadURL = await getDownloadURL(imageRef);
+                await updateDoc(doc(db,"assets",docRef.id),{
+                    thumbnail:downloadURL
+                });
+            })
+
             setOpenProgress(false);
-        }).catch(err => console.error(err))
+            handleClickOpen();
+        } else {
+            setOpenProgress(false);
+            handleClickOpen();
+        }
     }
 
-    const { values,handleBlur,handleSubmit,touched,errors,handleChange} = useFormik({
+    const { values,handleSubmit,touched,errors,handleChange} = useFormik({
         initialValues:{title:'',wallet:'',price:0,ticker:'',notes:'',quantity:0},
         onSubmit:(values) => {
             setOpenProgress(true);
@@ -143,9 +173,17 @@ export default function Create () {
                     />
                     {touched.notes && errors.notes ? <span className="text-xs text-red-500">{errors.notes}</span> : null}
                 </div>
+                <div>
+                    <input 
+                    className=""
+                    type="file"
+                    accept="image/*"
+                    onChange={addImageToPost}
+                    />
+                </div>
            
                 <Button type="submit" variant="contained" color="secondary">
-                    {openProgress ? <CircularProgress color="info"/> : <span>CREATE PORTFOLIO</span>}
+                    {openProgress ? <CircularProgress style={{color:"white"}}/> : <span>CREATE PORTFOLIO</span>}
                 </Button>
             </form>
         </main>

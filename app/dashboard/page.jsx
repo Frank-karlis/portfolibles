@@ -71,6 +71,7 @@ export default function Dashboard () {
                             tick={item.data.ticker}
                             price={item.data.price}
                             notes={item.data.notes}
+                            img={item.data?.thumbnail}
                             key={item.id}/>
                         )
                     })}
