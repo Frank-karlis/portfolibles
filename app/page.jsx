@@ -1,4 +1,3 @@
-import { Footer } from "./components/Footer";
 import Link from "next/link";
 import{GrMoney} from "react-icons/gr";
 import{TbTrack} from "react-icons/tb";
@@ -39,11 +38,11 @@ export default function Home() {
 
         <div className="flex flex-col justify-around bg-[#A91D3a] rounded-lg p-4">
           <p className="text-4xl  text-[#F0ECE5]"> Use Quick Yield Caculator</p>
-          <button className="bg-[#F0ECE5] rounded-lg w-full py-3 uppercase text-2xl text-[#161A30]">Calculate</button>
+          <Link  href="/Yield" className="bg-[#F0ECE5] rounded-lg w-full py-3 uppercase text-2xl text-[#161A30]">Calculate</Link>
         </div>
         <div className="flex flex-col justify-around bg-[#A91D3a] rounded-lg p-4">
           <p className="text-4xl  text-[#F0ECE5]"> Start Tracking Your Investment now</p>
-          <Link href='#' className="bg-[#F0ECE5] rounded-lg w-full py-3 uppercase text-2xl text-[#161A30]" >Get Started</Link>
+          <Link href='/dashboard' className="bg-[#F0ECE5] rounded-lg w-full py-3 uppercase text-2xl text-[#161A30]" >Get Started</Link>
         </div>
         </article>
       </section>

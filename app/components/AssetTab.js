@@ -1,11 +1,10 @@
-
 "use client"
 import React from "react";
 import Image from "next/image";
 import { BsBoxArrowUpRight } from "react-icons/bs";
 import { CiWallet } from "react-icons/ci";
 import { FaTrash,FaPencilAlt } from "react-icons/fa";
-import { db } from "@/lib/firebase.setting";
+import { db } from "@/lib/firebase";
 import { deleteDoc,doc,updateDoc } from "firebase/firestore";
 import { TextField } from "@mui/material";
 import Button from '@mui/material/Button';
