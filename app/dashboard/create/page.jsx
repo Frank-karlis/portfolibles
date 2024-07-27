@@ -14,6 +14,7 @@ import * as yup from "yup";
 import { db,storage } from "@/lib/firebase";
 import { collection,addDoc,updateDoc,doc } from "firebase/firestore";
 import { ref,uploadString,getDownloadURL } from "firebase/storage";
+import { useSession } from "next-auth/react";
 
 const rules = yup.object().shape({
     title:yup.string().required().min(3),
@@ -25,6 +26,7 @@ const rules = yup.object().shape({
 })
 
 export default function Create () {
+    const {data:session} = useSession();
     const [open, setOpen] = React.useState(false);
     const [openProgress,setOpenProgress] = React.useState(false);
     const [selectedFile,setSelectedFile] = React.useState(null);
@@ -59,7 +61,7 @@ export default function Create () {
             quantity:values.quantity,
             notes:values.notes,
             timestamp:new Date().getTime(),
-            createdBy:null,
+            createdBy:session.user.email,
         });
         
         const imageRef = ref(storage,`assets/${docRef.id}/image`);
