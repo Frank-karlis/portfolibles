@@ -29,7 +29,7 @@ export function Nav () {
         :
         <Link 
         className="border-b-2 border-[#31304D] text-[#31304D] py-3" 
-        href="/auth">Sign in</Link>
+        href="/auth/signin">Sign in</Link>
         }
       </nav>
   )
