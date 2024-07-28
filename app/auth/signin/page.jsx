@@ -1,6 +1,6 @@
 "use client"
 import { FcGoogle } from "react-icons/fc";
-import { FaTwitter } from "react-icons/fa6";
+import { FaXTwitter} from "react-icons/fa6";
 import { signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
 
@@ -37,7 +37,7 @@ export default function Auth() {
           <button
             type="submit"
             className="w-full h-[56px] flex justify-center items-center gap-6 border border-gray-400 rounded-md">
-            <FaTwitter className="text-3xl" />
+            <FaXTwitter className="text-3xl" />
             <span className="text-gray-700">Twitter</span>
           </button>
         </form>
