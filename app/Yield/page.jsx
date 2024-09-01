@@ -91,11 +91,11 @@ export default function Yield() {
                             {touched.newPrice && errors.newPrice ? <span className="text-xs text-red-500">{errors.newPrice}</span> : null}
                         </div>
 
-                        <Button 
-                    type="submit" 
-                    variant="contained" 
-                    color="secondary"
-                    style={{padding:12}}>CALCULATE</Button>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="secondary"
+                            style={{ padding: 12 }}>CALCULATE</Button>
                     </form>
                 </section>
 
