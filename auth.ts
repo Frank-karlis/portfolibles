@@ -10,17 +10,17 @@ export const { handlers,auth,signIn,signOut } = NextAuth({
   providers: [
     GoogleProvider({
         clientId:process.env.GOOGLE_CLIENT_ID,
-        clientSecret:process.env.GOOGLE_CLIENT_SECRECT
+        clientSecret:process.env.GOOGLE_CLIENT_SECRECT,
     }),
     TwitterProvider({
         clientId:process.env.TWITTER_CLIENT_ID,
         clientSecret:process.env.TWITTER_CLIENT_SECRET,
     }),
     
-    // FacebookProvider({
-    //     clientId: process.env.FACEBOOK_CLIENT_ID,
-    //     clientSecret:process.env.FACEBOOK_CLIENT_SECRET,
-    // }),
+    FacebookProvider({
+        clientId: process.env.FACEBOOK_APP_ID,
+        clientSecret:process.env.FACEBOOK_APP_SECRET,
+    }),
 ],
 });
 

@@ -36,7 +36,7 @@ export default function Auth() {
               <span className="text-gray-700">Twitter</span> 
             </button>
           </form>
-          {/* <form
+          <form
           action={async () => {
             await signIn("facebook")
           }}
@@ -47,7 +47,7 @@ export default function Auth() {
               <FaSquareFacebook className="text-3xl"/>
               <span className="text-gray-700">Facebook</span> 
             </button>
-          </form> */}
+          </form>
       </div>
     </main>
   )
