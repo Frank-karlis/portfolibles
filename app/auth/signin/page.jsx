@@ -36,6 +36,7 @@ export default function Auth() {
               <span className="text-gray-700">Twitter</span> 
             </button>
           </form>
+          
           <form
           action={async () => {
             await signIn("facebook")
