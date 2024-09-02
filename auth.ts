@@ -16,6 +16,7 @@ export const { handlers,auth,signIn,signOut } = NextAuth({
         clientId:process.env.TWITTER_CLIENT_ID,
         clientSecret:process.env.TWITTER_CLIENT_SECRET,
     }),
+    
     // FacebookProvider({
     //     clientId: process.env.FACEBOOK_CLIENT_ID,
     //     clientSecret:process.env.FACEBOOK_CLIENT_SECRET,
